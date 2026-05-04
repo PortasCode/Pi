@@ -98,11 +98,35 @@ void write_int_line_cont(int *ptr_array[], int n) {
 // 3
 ///////////////////////////////////////////////////////////
 
-int read_char_lines(char *array[]) {}
+int read_char_lines(char *array[]) {
+  char bufor[BUF_SIZE];
+  int count = 0;
 
-void write_char_line(char *array[], int n) {}
+  while (fgets(bufor, BUF_SIZE, stdin) != NULL) {
+    array[count] = malloc((strlen(bufor) + 1) * sizeof(char));
 
-void delete_lines(char *array[]) {}
+    if (array[count] != NULL) {
+      strcpy(array[count], bufor);
+      count++;
+    }
+  }
+  return count;
+}
+
+void write_char_line(char *array[], int n) {
+  if (array[n] != NULL) {
+    printf("%s", array[n]);
+  }
+}
+
+void delete_lines(char *array[]) {
+  int i = 0;
+  while (array[i] != NULL) {
+    free(array[i]);
+    array[i] = NULL;
+    i++;
+  }
+}
 
 // auxiliary
 ////////////////////////////////////////////////////////////
